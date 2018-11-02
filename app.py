@@ -1,0 +1,60 @@
+from flask import Flask, render_template, jsonify, make_response, request, abort
+import pickle
+import numpy as np
+import pandas as pd
+from pprint import pprint
+import random
+
+app = Flask(__name__)
+# https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+
+# load the model from disk
+filenameEnc = 'model/encoder.sav'
+attrEnc = pickle.load(open(filenameEnc, 'rb'))
+filenameYEnc = 'model/Yencoder.sav'
+yEnc = pickle.load(open(filenameYEnc, 'rb'))
+filename = 'model/mpl.sav'
+loaded_model = pickle.load(open(filename, 'rb'))
+
+
+def trasform(x):
+    x = x.map(lambda i: i if i in attrEnc[x.name].classes_ else random.choice(attrEnc[x.name].classes_))
+    return attrEnc[x.name].transform(x)
+
+
+def encode(json):
+    pprint(json)
+    df = pd.DataFrame(json, index=[0])
+    # Using the dictionary to label future data
+    return df.apply(trasform)
+
+
+def predict(X):
+    print(X.shape)
+    y_prob = loaded_model.predict_proba(X)[:, 1]
+    print(y_prob)
+    y_pred = np.where(y_prob > 0.5, 1, 0)
+    return yEnc.inverse_transform(y_pred)
+
+
+@app.route('/')
+def landingPage():
+    return render_template("index.html")
+
+
+@app.route('/mush/api/predict', methods=['POST'])
+def APIpredict():
+    if not request.json:
+        abort(400)
+    X = encode(request.json)
+    res = predict(X)
+    return jsonify(res.tolist())
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+if __name__ == '__main__':
+    app.run()
