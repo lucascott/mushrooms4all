@@ -13,9 +13,6 @@ print(df.head())
 y = df["class"].to_frame()
 X = df.drop("class", axis=1)
 
-
-
-
 # Encoding the variable
 
 attrDict = defaultdict(LabelEncoder)
@@ -35,12 +32,11 @@ df.apply(lambda x: attrDict[x.name].transform(x))
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
 
 mlp = MLPClassifier()
-mlp.fit(X_train,y_train)
+mlp.fit(X_train, y_train)
 print("Accuracy: " + str(mlp.score(X_test, y_test)))
-y_prob = mlp.predict_proba(X_test)[:,1]
+y_prob = mlp.predict_proba(X_test)[:, 1]
 y_pred = np.where(y_prob > 0.5, 1, 0)
 print(y_pred)
-
 
 # save the model to disk
 filenameEnc = 'model/encoder.sav'

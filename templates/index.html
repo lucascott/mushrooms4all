@@ -8,39 +8,41 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 </nav>
 
 <div class="container text-center">
@@ -48,65 +50,23 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Mushrooms4All</h1>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="cap-shape">Cap Shape</label>
-              </div>
-              <select class="custom-select" id="cap-shape">
-                    <option selected>Choose...</option>
-                    <option value="b">Bell</option>
-                    <option value="c">Conical</option>
-                    <option value="x">Convex</option>
-                    <option value="f">Flat</option>
-                    <option value="k">Knobbed</option>
-                    <option value="s">Sunken</option>
-              </select>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="cap-surface">Cap Surface</label>
-              </div>
-              <select class="custom-select" id="cap-surface">
-                    <option selected>Choose...</option>
-                    <option value="f">Fibrous</option>
-                    <option value="g">Grooves</option>
-                    <option value="y">Scaly</option>
-                    <option value="s">Smooth</option>
-              </select>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-              </div>
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-              </div>
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="inputGroupSelect01">Options</label>
-              </div>
-              <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
+            <form id="mush">
+                {% for key, fields in inputs.items() %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text text-capitalize" for="{{ key }}">{{ key }}</label>
+                        </div>
+                        <select class="custom-select text-capitalize" id="{{ key }}" required>
+                            <option selected>Choose...</option>
+                            {% for str, value in fields.items() %}
+                                <option value="{{ value }}">{{ str }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Predict</button>
+            </form>
+            <h2>Prediction: <span id="prediction"></span></h2>
         </div>
 
     </div>
@@ -114,8 +74,69 @@
 </div>
 
 
-<script src="../static/js/jquery-3.3.1.slim.min.js"></script>
+<script src="../static/js/jquery-3.3.1.min.js"></script>
 <script src="../static/js/popper.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
+
+<script>
+    var example = null;
+    $(document).ready(function () {
+        // Set form variable
+        var form = $('#mush');
+
+        // Hijack form submit
+        form.submit(function (event) {
+            example = {
+                "cap-shape": $("#cap-shape").val(),
+                "cap-surface": $("#cap-surface").val(),
+                "cap-color": $("#cap-color").val(),
+                "bruises": $("#bruises").val(),
+                "odor": $("#odor").val(),
+                "gill-attachment": $("#gill-attachment").val(),
+                "gill-spacing": $("#gill-spacing").val(),
+                "gill-size": $("#gill-size").val(),
+                "gill-color": $("#gill-color").val(),
+                "stalk-shape": $("#stalk-shape").val(),
+                "stalk-root": $("#stalk-root").val(),
+                "stalk-surface-above-ring": $("#stalk-surface-above-ring").val(),
+                "stalk-surface-below-ring": $("#stalk-surface-below-ring").val(),
+                "stalk-color-above-ring": $("#stalk-color-above-ring").val(),
+                "stalk-color-below-ring": $("#stalk-color-below-ring").val(),
+                "veil-type": $("#veil-type").val(),
+                "veil-color": $("#veil-color").val(),
+                "ring-number": $("#ring-number").val(),
+                "ring-type": $("#ring-type").val(),
+                "spore-print-color": $("#spore-print-color").val(),
+                "population": $("#population").val(),
+                "habitat": $("#habitat").val()
+            };
+            // Check if username value set
+            if ($.trim(example) != '') {
+                // Process AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: "/mush/api/predict",
+                    data: JSON.stringify(example),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log(data);
+                        $('#mush').fadeOut();
+                        if (data[0] === 'e') {
+                            $('#prediction').html("Eatable");
+                        }
+                        else {
+                            $('#prediction').html("Poisonous");
+                        }
+
+                    }
+                });
+
+                // Prevent default form action
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 </html>
