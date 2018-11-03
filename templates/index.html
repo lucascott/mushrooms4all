@@ -2,33 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mushrooms4All</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Mushrooms4All</h1>
-<p>
-    "cap-shape": bell=b,conical=c,convex=x,flat=f, knobbed=k,sunken=s
-    "cap-surface": fibrous=f,grooves=g,scaly=y,smooth=s
-    "cap-color": brown=n,buff=b,cinnamon=c,gray=g,green=r,pink=p,purple=u,red=e,white=w,yellow=y
-    "bruises": bruises=t,no=f
-    "odor": almond=a,anise=l,creosote=c,fishy=y,foul=f,musty=m,none=n,pungent=p,spicy=s
-    "gill-attachment": attached=a,descending=d,free=f,notched=n
-    "gill-spacing": close=c,crowded=w,distant=d
-    "gill-size": broad=b,narrow=n
-    "gill-color": black=k,brown=n,buff=b,chocolate=h,gray=g, green=r,orange=o,pink=p,purple=u,red=e,white=w,yellow=y
-    "stalk-shape": enlarging=e,tapering=t
-    "stalk-root": bulbous=b,club=c,cup=u,equal=e,rhizomorphs=z,rooted=r,missing=?
-    "stalk-surface-above-ring": fibrous=f,scaly=y,silky=k,smooth=s
-    "stalk-surface-below-ring": fibrous=f,scaly=y,silky=k,smooth=s
-    "stalk-color-above-ring": brown=n,buff=b,cinnamon=c,gray=g,orange=o,pink=p,red=e,white=w,yellow=y
-    "stalk-color-below-ring": brown=n,buff=b,cinnamon=c,gray=g,orange=o,pink=p,red=e,white=w,yellow=y
-    "veil-type": partial=p,universal=u
-    "veil-color": brown=n,orange=o,white=w,yellow=y
-    "ring-number": none=n,one=o,two=t
-    "ring-type": cobwebby=c,evanescent=e,flaring=f,large=l,none=n,pendant=p,sheathing=s,zone=z
-    "spore-print-color": black=k,brown=n,buff=b,chocolate=h,green=r,orange=o,purple=u,white=w,yellow=y
-    "population": abundant=a,clustered=c,numerous=n,scattered=s,several=v,solitary=y
-    "habitat": grasses=g,leaves=l,meadows=m,paths=p,urban=u,waste=w,woods=d
-</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container text-center">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Mushrooms4All</h1>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="cap-shape">Cap Shape</label>
+              </div>
+              <select class="custom-select" id="cap-shape">
+                    <option selected>Choose...</option>
+                    <option value="b">Bell</option>
+                    <option value="c">Conical</option>
+                    <option value="x">Convex</option>
+                    <option value="f">Flat</option>
+                    <option value="k">Knobbed</option>
+                    <option value="s">Sunken</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="cap-surface">Cap Surface</label>
+              </div>
+              <select class="custom-select" id="cap-surface">
+                    <option selected>Choose...</option>
+                    <option value="f">Fibrous</option>
+                    <option value="g">Grooves</option>
+                    <option value="y">Scaly</option>
+                    <option value="s">Smooth</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Options</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="../static/js/jquery-3.3.1.slim.min.js"></script>
+<script src="../static/js/popper.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
 </body>
 </html>
