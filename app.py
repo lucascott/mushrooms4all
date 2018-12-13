@@ -1,9 +1,9 @@
-from flask import Flask, render_template, jsonify, make_response, request, abort
 import pickle
-import numpy as np
-import pandas as pd
-from pprint import pprint
 import random
+from pprint import pprint
+
+import pandas as pd
+from flask import Flask, render_template, jsonify, make_response, request, abort
 
 app = Flask(__name__)
 # https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
@@ -13,7 +13,7 @@ filenameEnc = 'model/encoder.sav'
 attrEnc = pickle.load(open(filenameEnc, 'rb'))
 filenameYEnc = 'model/Yencoder.sav'
 yEnc = pickle.load(open(filenameYEnc, 'rb'))
-filename = 'model/mpl.sav'
+filename = 'model/GBC.sav'
 loaded_model = pickle.load(open(filename, 'rb'))
 
 
@@ -31,9 +31,7 @@ def encode(json):
 
 def predict(X):
     print(X.shape)
-    y_prob = loaded_model.predict_proba(X)[:, 1]
-    print(y_prob)
-    y_pred = np.where(y_prob > 0.5, 1, 0)
+    y_pred = loaded_model.predict(X)
     return yEnc.inverse_transform(y_pred)
 
 
