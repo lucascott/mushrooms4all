@@ -9,7 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import model_selection
-from sklearn.metrics import recall_score, accuracy_score
+from sklearn.metrics import recall_score, accuracy_score, confusion_matrix
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -42,8 +42,11 @@ le_name_mapping = dict(zip(yEncoder.classes_, yEncoder.transform(yEncoder.classe
 
 print(le_name_mapping)
 
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
-
+# save the encoders to disk
+filenameEnc = 'encoder.sav'
+pickle.dump(attrDict, open(filenameEnc, 'wb'))
+filenameYEnc = 'Yencoder.sav'
+pickle.dump(yEncoder, open(filenameYEnc, 'wb'))
 
 '''
 # Inverse the encoded
@@ -54,18 +57,17 @@ df.apply(lambda x: attrDict[x.name].transform(x))
 '''
 
 models = []
-models.append(('GNB', GaussianNB()))
-models.append(('RFC', RandomForestClassifier(n_estimators=500)))
-models.append(('ABC', AdaBoostClassifier(n_estimators=500)))
-models.append(('LDA', LinearDiscriminantAnalysis()))
-models.append(('QDA', QuadraticDiscriminantAnalysis()))
+# models.append(('GNB', GaussianNB()))
+# models.append(('RFC', RandomForestClassifier(n_estimators=500)))
+# models.append(('ABC', AdaBoostClassifier(n_estimators=500)))
+# models.append(('LDA', LinearDiscriminantAnalysis()))
+# models.append(('QDA', QuadraticDiscriminantAnalysis()))
 # models.append(('NSVC', NuSVC(probability=True)))
-
-models.append(('GBC', GradientBoostingClassifier(n_estimators=500)))
-models.append(('KNN', KNeighborsClassifier(3)))
-models.append(('CART', DecisionTreeClassifier()))
-models.append(('SVM', SVC(gamma="scale")))
-models.append(('MPL', MLPClassifier((150, 3), max_iter=500)))
+models.append(('GBC00', GradientBoostingClassifier(n_estimators=500, learning_rate=0.5)))
+# models.append(('KNN', KNeighborsClassifier(3)))
+# models.append(('CART', DecisionTreeClassifier()))
+# models.append(('SVM', SVC(gamma="scale")))
+# models.append(('MPL', MLPClassifier((150, 3), max_iter=500)))
 results = []
 
 names = []
@@ -87,6 +89,7 @@ for name, model in models:
         if maxx < recall:
             maxx = recall
             exportModel(model, name)
+            print(confusion_matrix(y_test, y_pred, [0,1]))
     cv_results = np.array(cv_results)
     results.append(cv_results)
     names.append(name)
@@ -100,16 +103,3 @@ ax.set_xticklabels(names)
 
 plt.show()
 
-'''
-mlp = MLPClassifier(120, max_iter=1500)
-mlp.fit(X_train, y_train)
-print("Accuracy: " + str(mlp.score(X_test, y_test)))
-y_prob = mlp.predict_proba(X_test)[:, 1]
-y_pred = np.where(y_prob > 0.5, 1, 0)
-print(y_pred)
-'''
-# save the encoders to disk
-filenameEnc = 'encoder.sav'
-pickle.dump(attrDict, open(filenameEnc, 'wb'))
-filenameYEnc = 'Yencoder.sav'
-pickle.dump(yEncoder, open(filenameYEnc, 'wb'))
